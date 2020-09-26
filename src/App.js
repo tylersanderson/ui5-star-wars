@@ -7,6 +7,7 @@ import {
   LinkDesign,
   ShellBar,
 } from "@ui5/webcomponents-react";
+import "@ui5/webcomponents/dist/Assets.js";
 import { ThemeProvider } from "@ui5/webcomponents-react/lib/ThemeProvider";
 import React from "react";
 import "./App.css";
