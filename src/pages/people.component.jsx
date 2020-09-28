@@ -54,6 +54,7 @@ export function People() {
     );
     return peopleTableColumnHeadersResult;
   }
+
   useEffect(() => {
     fetchPeopleList(peoplePage).then((result) => setPeopleList(result));
     fetchPeopleListSchema().then((result) =>
@@ -135,35 +136,6 @@ export function People() {
       data: 40,
     },
   ];
-  const tableData = new Array(500).fill(null).map((_, index) => {
-    return {
-      name: `name${index}`,
-      age: Math.floor(Math.random() * 100),
-      friend: {
-        name: `friend.Name${index}`,
-        age: Math.floor(Math.random() * 100),
-      },
-    };
-  });
-
-  const tableColumns = [
-    {
-      Header: "Name",
-      accessor: "name", // String-based value accessors!
-    },
-    {
-      Header: "Height",
-      accessor: "height",
-    },
-    {
-      Header: "Friend Name",
-      accessor: "friend.name",
-    },
-    {
-      Header: "Friend Age",
-      accessor: "friend.age",
-    },
-  ];
 
   const contentTitle =
     toggleCharts === "lineChart" ? "Line Chart" : "Bar Chart";
@@ -193,10 +165,18 @@ export function People() {
           wrap={FlexBoxWrap.Wrap}
           style={spacing.sapUiContentPadding}
         >
-          <Button icon="arrow-left" onClick={handleBackPageClick}>
+          <Button
+            icon="arrow-left"
+            onClick={handleBackPageClick}
+            disabled={peopleList.previous == null ? true : false}
+          >
             Back
           </Button>
-          <Button icon="arrow-right" onClick={handleNextPageClick}>
+          <Button
+            icon="arrow-right"
+            onClick={handleNextPageClick}
+            disabled={peopleList.next == null ? true : false}
+          >
             Next
           </Button>
         </FlexBox>
@@ -270,17 +250,6 @@ export function People() {
             </FlexBox>
           </StandardListItem>
         </List>
-      </Card>
-      <Card
-        heading="AnalyticalTable"
-        style={{ maxWidth: "900px", ...spacing.sapUiContentPadding }}
-        avatar={<Icon name="table-view" />}
-      >
-        <AnalyticalTable
-          data={tableData}
-          columns={tableColumns}
-          visibleRows={5}
-        />
       </Card>
     </FlexBox>
   );
