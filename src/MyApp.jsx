@@ -31,7 +31,7 @@ export function MyApp() {
         onLogoClick={handleLogoClick}
         menuItems={
           <div>
-            <Link to="/home" design="Default" disabled={false}>
+            <Link to="/home">
               <StandardListItem
                 data-key="1"
                 iconEnd={false}

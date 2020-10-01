@@ -17,7 +17,11 @@ import {
   Button,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
-import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
+import {
+  BarChart,
+  LineChart,
+  ScatterChart,
+} from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
@@ -33,12 +37,12 @@ export function Planets() {
     []
   );
   const [planetsPage, setPlanetsPage] = useState(1);
+  const [toggleCharts, setToggleCharts] = useState("lineChart");
   const [loading, setLoading] = useState(false);
 
   async function fetchplanetsList(x) {
     let planets = await fetch(`https://swapi.dev/api/planets/?page=${x}`);
     let planetsJSON = await planets.json();
-    setLoading(false);
     return planetsJSON;
   }
 
@@ -46,7 +50,6 @@ export function Planets() {
     let initialList = await fetch(`https://swapi.dev/api/${data}/?page=1`);
     let initialListJSON = await initialList.json();
     return initialListJSON.count;
-    //console.log(initialListJSON.count);
   }
 
   async function fetchplanetsListSchema() {
@@ -65,6 +68,7 @@ export function Planets() {
   }
 
   const fetchList = async function () {
+    setLoading(true);
     const max = await getListCount("planets");
     const list = [];
     const requests = [];
@@ -74,6 +78,7 @@ export function Planets() {
 
       requests.push(prom);
     }
+    setLoading(false);
     return new Promise((resolve) => {
       Promise.all(requests)
         .then((proms) => proms.forEach((p) => list.push(p)))
@@ -81,13 +86,12 @@ export function Planets() {
     });
   };
 
-  fetchList().then(console.log);
-
   useEffect(() => {
-    fetchplanetsList(planetsPage).then((result) => setPlanetsList(result));
+    //fetchplanetsList(planetsPage).then((result) => setPlanetsList(result));
     fetchplanetsListSchema().then((result) =>
       setPlanetsTableColumnHeaders(result)
     );
+    fetchList().then((result) => setPlanetsList(result));
   }, []);
 
   console.log(planetsPage);
@@ -114,10 +118,23 @@ export function Planets() {
     }
   };
 
+  const handleHeaderClick = () => {
+    if (toggleCharts === "lineChart") {
+      setToggleCharts("barChart");
+    } else {
+      setToggleCharts("lineChart");
+    }
+  };
+
   const history = useHistory();
   const handleProgressHeaderClick = () => {
     history.push("/detail");
   };
+
+  const contentTitle =
+    toggleCharts === "lineChart" ? "Line Chart" : "Bar Chart";
+  const switchToChart =
+    toggleCharts === "lineChart" ? "Bar Chart" : "Line Chart";
 
   return (
     <FlexBox
@@ -126,12 +143,46 @@ export function Planets() {
       style={spacing.sapUiContentPadding}
     >
       <Card
+        avatar={
+          <Icon
+            name={
+              toggleCharts === "lineChart"
+                ? "line-chart"
+                : "horizontal-bar-chart"
+            }
+          />
+        }
+        heading="Planet Population"
+        //style={{ width: "1200px" }}
+        headerInteractive
+        onHeaderClick={handleHeaderClick}
+        subheading={`Click here to switch to ${switchToChart}`}
+      >
+        <Text style={spacing.sapUiContentPadding}>{contentTitle}</Text>
+        {toggleCharts === "lineChart" ? (
+          <LineChart
+            dimensions={[{ accessor: "name" }]}
+            measures={[{ accessor: "population", label: "Population" }]}
+            dataset={planetsList}
+            loading={loading}
+          />
+        ) : (
+          <BarChart
+            dimensions={[{ accessor: "name" }]}
+            measures={[{ accessor: "population", label: "Population" }]}
+            dataset={planetsList}
+            loading={loading}
+          />
+        )}
+      </Card>
+
+      <Card
         heading="Planets"
         style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
         avatar={<Icon name="table-view" />}
       >
         <AnalyticalTable
-          data={planetsList.results}
+          data={planetsList}
           columns={planetsTableColumnHeaders}
           visibleRows={10}
           scaleWidthMode={"Grow"}
