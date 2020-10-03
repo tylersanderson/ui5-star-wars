@@ -4,6 +4,7 @@ import {
   ShellBarItem,
   Avatar,
   StandardListItem,
+  List,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/icons/add.js";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
@@ -31,7 +32,7 @@ export function MyApp() {
         onLogoClick={handleLogoClick}
         menuItems={
           <div>
-            <Link to="/home">
+            <Link to="/#/home">
               <StandardListItem
                 data-key="1"
                 iconEnd={false}
@@ -42,7 +43,7 @@ export function MyApp() {
                 Home
               </StandardListItem>
             </Link>
-            <Link to="/films">
+            <Link to="/#/films">
               <StandardListItem
                 data-key="2"
                 iconEnd={false}
@@ -53,7 +54,7 @@ export function MyApp() {
                 Films
               </StandardListItem>
             </Link>
-            <Link to="/people">
+            <Link to="/#/people">
               <StandardListItem
                 data-key="3"
                 iconEnd={false}
@@ -64,7 +65,7 @@ export function MyApp() {
                 People
               </StandardListItem>
             </Link>
-            <Link to="/planets">
+            <Link to="/#/planets">
               <StandardListItem
                 data-key="3"
                 iconEnd={false}

@@ -21,6 +21,7 @@ import {
   BarChart,
   LineChart,
   ScatterChart,
+  MicroBarChart,
 } from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
@@ -100,6 +101,20 @@ export function Planets() {
   console.log(planetsTableColumnHeaders);
   //getListCount("planets");
 
+  const sortedPlanetsPopulationList = [...planetsList];
+  sortedPlanetsPopulationList.sort(
+    (a, b) => parseFloat(a.population) - parseFloat(b.population)
+  );
+
+  console.log(sortedPlanetsPopulationList);
+
+  const sortedPlanetsDiameterList = [...planetsList];
+  sortedPlanetsDiameterList.sort(
+    (a, b) => parseFloat(b.diameter) - parseFloat(a.diameter)
+  );
+
+  console.log(sortedPlanetsDiameterList);
+
   const handleNextPageClick = async () => {
     if (planetsPage <= 8) {
       setLoading(true);
@@ -163,17 +178,33 @@ export function Planets() {
           <LineChart
             dimensions={[{ accessor: "name" }]}
             measures={[{ accessor: "population", label: "Population" }]}
-            dataset={planetsList}
+            dataset={sortedPlanetsPopulationList.slice(0, 10)}
             loading={loading}
           />
         ) : (
           <BarChart
             dimensions={[{ accessor: "name" }]}
             measures={[{ accessor: "population", label: "Population" }]}
-            dataset={planetsList}
+            dataset={sortedPlanetsPopulationList.slice(0, 10)}
             loading={loading}
           />
         )}
+      </Card>
+
+      <Card
+        avatar={<Icon name={"horizontal-bar-chart-2"} />}
+        heading="Planet Diameter"
+        style={{ ...spacing.sapUiContentPadding }}
+        //headerInteractive
+        subheading={""}
+      >
+        <Text style={spacing.sapUiContentPadding}>MicroBarChart</Text>
+        <MicroBarChart
+          dimension={{ accessor: "name" }}
+          measure={{ accessor: "diameter" }}
+          dataset={sortedPlanetsDiameterList.slice(0, 10)}
+          loading={loading}
+        />
       </Card>
 
       <Card
