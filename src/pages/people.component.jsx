@@ -101,10 +101,10 @@ export function People() {
     }
   };
 
-  const history = useHistory();
-  const handleProgressHeaderClick = () => {
-    history.push("/detail");
-  };
+  // const history = useHistory();
+  // const handleProgressHeaderClick = () => {
+  //   history.push("/detail");
+  // };
 
   const dataset = [
     {
@@ -148,6 +148,7 @@ export function People() {
       wrap={FlexBoxWrap.Wrap}
       style={spacing.sapUiContentPadding}
     >
+      <Title level="H1">People</Title>
       <Card
         heading="People"
         style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}

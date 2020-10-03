@@ -51,35 +51,35 @@ export function Home() {
           icon="attachment-video"
           subtitle="UI5 Notification Item List"
           target="_self"
-          targetSrc="/#/films"
+          targetSrc="#/films"
         ></ProductSwitchItem>
         <ProductSwitchItem
           heading="People"
           icon="company-view"
           subtitle="Analytical Table"
           target="_self"
-          targetSrc="#/people/"
+          targetSrc="#/people"
         />
         <ProductSwitchItem
           heading="Species"
           icon="work-history"
           subtitle="Concur"
           target="_self"
-          targetSrc="#/species/"
+          targetSrc="#/species"
         />
         <ProductSwitchItem
           heading="Planets"
           icon="world"
           subtitle="Line Chart, Bar Chart, Micro Bar Chart"
           target="_self"
-          targetSrc="#/planets/"
+          targetSrc="#/planets"
         />
         <ProductSwitchItem
           heading="Vehicles"
           icon="shipping-status"
           subtitle="Concur"
           target="_self"
-          targetSrc="#/vehicles/"
+          targetSrc="#/vehicles"
         />
 
         <ProductSwitchItem

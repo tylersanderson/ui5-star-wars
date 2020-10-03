@@ -27,8 +27,8 @@ import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
 import "@ui5/webcomponents-icons/dist/icons/table-view.js";
-import { useHistory } from "react-router-dom";
 import "@ui5/webcomponents/dist/Assets.js";
+import "@ui5/webcomponents-react/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
 
@@ -79,11 +79,12 @@ export function Planets() {
 
       requests.push(prom);
     }
-    setLoading(false);
+    //setLoading(false);
     return new Promise((resolve) => {
       Promise.all(requests)
         .then((proms) => proms.forEach((p) => list.push(p)))
-        .then(() => resolve(list));
+        .then(() => resolve(list))
+        .then(setLoading(false));
     });
   };
 
@@ -141,11 +142,6 @@ export function Planets() {
     }
   };
 
-  const history = useHistory();
-  const handleProgressHeaderClick = () => {
-    history.push("/detail");
-  };
-
   const contentTitle =
     toggleCharts === "lineChart" ? "Line Chart" : "Bar Chart";
   const switchToChart =
@@ -157,6 +153,7 @@ export function Planets() {
       wrap={FlexBoxWrap.Wrap}
       style={spacing.sapUiContentPadding}
     >
+      <Title level="H1">Planets</Title>
       <Card
         avatar={
           <Icon
@@ -168,7 +165,7 @@ export function Planets() {
           />
         }
         heading="Planet Population"
-        //style={{ width: "1200px" }}
+        style={spacing.sapUiContentPadding}
         headerInteractive
         onHeaderClick={handleHeaderClick}
         subheading={`Click here to switch to ${switchToChart}`}

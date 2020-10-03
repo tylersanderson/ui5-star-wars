@@ -99,6 +99,7 @@ export function Films() {
       wrap={FlexBoxWrap.Wrap}
       style={spacing.sapUiContentPadding}
     >
+      <Title level="H1">Films</Title>
       <Card
         heading="Films"
         style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
