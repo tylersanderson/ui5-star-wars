@@ -10,6 +10,7 @@ import "@ui5/webcomponents-icons/dist/icons/add.js";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { People } from "./pages/people.component";
+import { Species } from "./pages/species.component";
 import { Films } from "./pages/films.component";
 import { Planets } from "./pages/planets.component";
 import { Home } from "./pages/home.component";
@@ -66,6 +67,17 @@ export function MyApp() {
                 People
               </StandardListItem>
             </Link>
+            <Link to="/species">
+              <StandardListItem
+                data-key="3"
+                iconEnd={false}
+                infoState="None"
+                selected={false}
+                type="Active"
+              >
+                Species
+              </StandardListItem>
+            </Link>
             <Link to="/planets">
               <StandardListItem
                 data-key="3"
@@ -79,11 +91,10 @@ export function MyApp() {
             </Link>
           </div>
         }
-      >
-        <ShellBarItem src="sap-icon://add" text="Add" />
-      </ShellBar>
+      ></ShellBar>
       <Switch>
         <Route path="/people" component={People} />
+        <Route path="/species" component={Species} />
         <Route path="/films" component={Films} />
         <Route path="/planets" component={Planets} />
         <Route path="/home" component={Home} />

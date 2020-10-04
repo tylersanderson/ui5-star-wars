@@ -56,21 +56,21 @@ export function Home() {
         <ProductSwitchItem
           heading="People"
           icon="company-view"
-          subtitle="Analytical Table"
+          subtitle="UI5 Analytical Table"
           target="_self"
           targetSrc="#/people"
         />
         <ProductSwitchItem
           heading="Species"
           icon="work-history"
-          subtitle="Concur"
+          subtitle="UI5 Card"
           target="_self"
           targetSrc="#/species"
         />
         <ProductSwitchItem
           heading="Planets"
           icon="world"
-          subtitle="Line Chart, Bar Chart, Micro Bar Chart"
+          subtitle="UI5 Line Chart, Bar Chart, Micro Bar Chart"
           target="_self"
           targetSrc="#/planets"
         />
