@@ -7,7 +7,8 @@ import {
   List,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/icons/add.js";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Link } from "@ui5/webcomponents-react/lib/Link";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { People } from "./pages/people.component";
 import { Species } from "./pages/species.component";
@@ -34,7 +35,7 @@ export function MyApp() {
         onLogoClick={handleLogoClick}
         menuItems={
           <div>
-            <Link to="/home">
+            <Link href="#/home">
               <StandardListItem
                 data-key="1"
                 iconEnd={false}
@@ -45,7 +46,7 @@ export function MyApp() {
                 Home
               </StandardListItem>
             </Link>
-            <Link to="/films">
+            <Link href="#/films">
               <StandardListItem
                 data-key="2"
                 iconEnd={false}
@@ -56,7 +57,7 @@ export function MyApp() {
                 Films
               </StandardListItem>
             </Link>
-            <Link to="/people">
+            <Link href="#/people">
               <StandardListItem
                 data-key="3"
                 iconEnd={false}
@@ -67,7 +68,7 @@ export function MyApp() {
                 People
               </StandardListItem>
             </Link>
-            <Link to="/species">
+            <Link href="#/species">
               <StandardListItem
                 data-key="3"
                 iconEnd={false}
@@ -78,7 +79,7 @@ export function MyApp() {
                 Species
               </StandardListItem>
             </Link>
-            <Link to="/planets">
+            <Link href="#/planets">
               <StandardListItem
                 data-key="3"
                 iconEnd={false}
@@ -87,6 +88,28 @@ export function MyApp() {
                 type="Active"
               >
                 Planets
+              </StandardListItem>
+            </Link>
+            <Link href="#/vehicles">
+              <StandardListItem
+                data-key="3"
+                iconEnd={false}
+                infoState="None"
+                selected={false}
+                type="Active"
+              >
+                Vehicles
+              </StandardListItem>
+            </Link>
+            <Link href="#/starships">
+              <StandardListItem
+                data-key="3"
+                iconEnd={false}
+                infoState="None"
+                selected={false}
+                type="Active"
+              >
+                Starships
               </StandardListItem>
             </Link>
           </div>

@@ -24,6 +24,7 @@ import {
   ScatterChart,
   MicroBarChart,
 } from "@ui5/webcomponents-react-charts";
+import { Spinner } from "@ui5/webcomponents-react/lib/Spinner";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
@@ -91,15 +92,15 @@ export function Species() {
 
   useEffect(() => {
     //fetchspeciesList(speciesPage).then((result) => setSpeciesList(result));
-    fetchspeciesListSchema().then((result) =>
-      setSpeciesTableColumnHeaders(result)
-    );
+    // fetchspeciesListSchema().then((result) =>
+    //   setSpeciesTableColumnHeaders(result)
+    // );
     fetchList().then((result) => setSpeciesList(result));
   }, []);
 
-  console.log(speciesPage);
+  //console.log(speciesPage);
   console.log(speciesList);
-  console.log(speciesTableColumnHeaders);
+  //console.log(speciesTableColumnHeaders);
 
   // const sortedspeciesPopulationList = [...speciesList];
   // sortedspeciesPopulationList.sort(
@@ -124,72 +125,77 @@ export function Species() {
       >
         <Title level="H1">Species</Title>
       </FlexBox>
-      <FlexBox
-        justifyContent={FlexBoxJustifyContent.Center}
-        wrap={FlexBoxWrap.Wrap}
-        style={spacing.sapUiContentPadding}
-      >
-        {speciesList.map((species, i) => {
-          return (
-            <Card
-              avatar={
-                <Avatar
-                  backgroundColor="Accent3"
-                  icon="person-placeholder"
-                  imageFitType="Cover"
-                  shape="Circle"
-                  size="S"
-                />
-              }
-              headerInteractive={false}
-              heading="Team Space"
-              onHeaderClick={function noRefCheck() {}}
-              status="3 of 5"
-              style={{
-                width: "300px",
-                padding: "10px",
-              }}
-              subheading="Direct Reports"
-            >
-              <List
-                busy={false}
-                infiniteScroll={false}
-                inset={false}
-                mode="None"
-                separators="All"
+      {loading ? (
+        <Spinner />
+      ) : (
+        <FlexBox
+          justifyContent={FlexBoxJustifyContent.Center}
+          wrap={FlexBoxWrap.Wrap}
+          style={spacing.sapUiContentPadding}
+        >
+          {speciesList.map((species, i) => {
+            return (
+              <Card
+                key={i}
+                avatar={
+                  <Avatar
+                    backgroundColor="Accent6"
+                    icon="person-placeholder"
+                    imageFitType="Cover"
+                    shape="Circle"
+                    size="S"
+                  />
+                }
+                headerInteractive={false}
+                heading={speciesList[i].name}
+                onHeaderClick={function noRefCheck() {}}
+                status={`${i + 1} of ${speciesList.length}`}
+                style={{
+                  width: "300px",
+                  padding: "10px",
+                }}
+                subheading="Species"
               >
-                <StandardListItem
-                  description="Software Architect"
-                  iconEnd={false}
-                  infoState="None"
-                  selected={false}
-                  type="Active"
+                <List
+                  busy={false}
+                  infiniteScroll={false}
+                  inset={false}
+                  mode="None"
+                  separators="All"
                 >
-                  {speciesList[i].name}
-                </StandardListItem>
-                <StandardListItem
-                  description="Visual Designer"
-                  iconEnd={false}
-                  infoState="None"
-                  selected={false}
-                  type="Active"
-                >
-                  Elena Petrova
-                </StandardListItem>
-                <StandardListItem
-                  description="Quality Specialist"
-                  iconEnd={false}
-                  infoState="None"
-                  selected={false}
-                  type="Active"
-                >
-                  John Miller
-                </StandardListItem>
-              </List>
-            </Card>
-          );
-        })}
-      </FlexBox>
+                  <StandardListItem
+                    description="Classification"
+                    iconEnd={false}
+                    infoState="None"
+                    selected={false}
+                    type="Active"
+                  >
+                    {speciesList[i].classification}
+                  </StandardListItem>
+                  <StandardListItem
+                    description="Languange"
+                    iconEnd={false}
+                    infoState="None"
+                    selected={false}
+                    type="Active"
+                  >
+                    {speciesList[i].language}
+                  </StandardListItem>
+                  <StandardListItem
+                    description="Average Lifespan"
+                    iconEnd={false}
+                    infoState="None"
+                    selected={false}
+                    type="Active"
+                  >
+                    {speciesList[i].average_lifespan}
+                  </StandardListItem>
+                </List>
+              </Card>
+            );
+          })}
+        </FlexBox>
+      )}
     </div>
   );
 }

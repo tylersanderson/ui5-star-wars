@@ -91,8 +91,6 @@ export function Films() {
     history.push("/detail");
   };
 
-  console.log(filmListResults);
-
   return (
     <FlexBox
       justifyContent={FlexBoxJustifyContent.Center}
@@ -109,8 +107,9 @@ export function Films() {
           {filmListResults.map((film, i) => {
             return (
               <NotificationListItem
+                key={i}
                 heading={filmListResults[i].title}
-                footnotes={<text>{filmListResults[i].release_date}</text>}
+                footnotes={<Text>{filmListResults[i].release_date}</Text>}
               >
                 {filmListResults[i].opening_crawl}
               </NotificationListItem>
