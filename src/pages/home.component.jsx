@@ -77,7 +77,7 @@ export function Home() {
         <ProductSwitchItem
           heading="Vehicles"
           icon="shipping-status"
-          subtitle="UI5 Carousel"
+          subtitle="UI5 Carousel and Object Page"
           target="_self"
           targetSrc="#/vehicles"
         />

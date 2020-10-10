@@ -15,6 +15,8 @@ import {
   AnalyticalTable,
   Icon,
   Button,
+  Link,
+  Label,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import {
@@ -33,6 +35,8 @@ import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webc
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
 import { Carousel } from "@ui5/webcomponents-react/lib/Carousel";
 import { Spinner } from "@ui5/webcomponents-react/lib/Spinner";
+import { ObjectPage } from "@ui5/webcomponents-react/lib/ObjectPage";
+import { ObjectPageSection } from "@ui5/webcomponents-react/lib/ObjectPageSection";
 
 export function Vehicles() {
   const [vehiclesList, setVehiclesList] = useState([]);
@@ -174,7 +178,7 @@ export function Vehicles() {
             arrowsPlacement="Content"
             cyclic={false}
             hideNavigation={false}
-            infiniteScrollOffset={1}
+            infiniteScrollOffset={0}
             itemsPerPageL={1}
             itemsPerPageM={1}
             itemsPerPageS={1}
@@ -185,13 +189,91 @@ export function Vehicles() {
             {vehiclesList.map((vehicles, i) => {
               return (
                 <div
+                  key={i}
                   style={{
-                    backgroundColor: "var(--sapInformationBackground)",
-                    height: "300px",
-                    width: "100%",
+                    height: "calc(100% - 1rem)",
+                    marginTop: "2rem",
+                    position: "relative",
+                    width: "calc(100% - 10rem)",
                   }}
                 >
-                  {vehiclesList[i].name}
+                  <ObjectPage
+                    headerContent={
+                      <div>
+                        <div
+                          style={{ display: "flex", flexDirection: "column" }}
+                        >
+                          <Text renderWhitespace={false} wrapping>
+                            Manufacturer: {vehiclesList[i].manufacturer}
+                          </Text>
+                          <Text renderWhitespace={false} wrapping>
+                            Cost: {vehiclesList[i].cost_in_credits} Credits
+                          </Text>
+                        </div>
+                        <div
+                          style={{ display: "flex", flexDirection: "column" }}
+                        ></div>
+                      </div>
+                    }
+                    mode="Default"
+                    style={{
+                      height: "500px",
+                    }}
+                    subTitle={vehiclesList[i].model}
+                    title={vehiclesList[i].name}
+                  >
+                    <ObjectPageSection
+                      id="0"
+                      isSection
+                      title="Capacity"
+                      titleUppercase
+                    >
+                      <Label
+                        required={false}
+                        showColon={false}
+                        wrap={false}
+                        wrapping
+                      >
+                        Cargo: {vehiclesList[i].cargo_capacity}
+                      </Label>
+                      <br></br>
+                      <Label required={false} showColon={false} wrap={false}>
+                        Consumables: {vehiclesList[i].consumables}
+                      </Label>
+                      <br></br>
+                      <Label required={false} showColon={false} wrap={false}>
+                        Crew: {vehiclesList[i].crew}
+                      </Label>
+                      <br></br>
+                      <Label required={false} showColon={false} wrap={false}>
+                        Passengers: {vehiclesList[i].passengers}
+                      </Label>
+                    </ObjectPageSection>
+                    <ObjectPageSection
+                      id="1"
+                      isSection
+                      title="Specifications"
+                      titleUppercase
+                    >
+                      <Label required={false} showColon={false} wrap={false}>
+                        Max Speed: {vehiclesList[i].max_atmosphering_speed}
+                      </Label>
+                      <br></br>
+                      <Label required={false} showColon={false} wrap={false}>
+                        Length: {vehiclesList[i].length}
+                      </Label>
+                    </ObjectPageSection>
+                    <ObjectPageSection
+                      id="2"
+                      isSection
+                      title="Class"
+                      titleUppercase
+                    >
+                      <Label required={false} showColon={false} wrap={false}>
+                        Class: {vehiclesList[i].vehicle_class}
+                      </Label>
+                    </ObjectPageSection>
+                  </ObjectPage>
                 </div>
               );
             })}
