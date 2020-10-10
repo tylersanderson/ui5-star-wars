@@ -14,6 +14,7 @@ import { People } from "./pages/people.component";
 import { Species } from "./pages/species.component";
 import { Films } from "./pages/films.component";
 import { Planets } from "./pages/planets.component";
+import { Vehicles } from "./pages/vehicles.component";
 import { Home } from "./pages/home.component";
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
@@ -121,6 +122,7 @@ export function MyApp() {
         <Route path="/films" component={Films} />
         <Route path="/planets" component={Planets} />
         <Route path="/home" component={Home} />
+        <Route path="/vehicles" component={Vehicles} />
         <Redirect from="/" to="/home" />
       </Switch>
     </>

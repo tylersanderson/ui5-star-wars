@@ -143,45 +143,54 @@ export function People() {
     toggleCharts === "lineChart" ? "Bar Chart" : "Line Chart";
 
   return (
-    <FlexBox
-      justifyContent={FlexBoxJustifyContent.Center}
-      wrap={FlexBoxWrap.Wrap}
-      style={spacing.sapUiContentPadding}
-    >
-      <Title level="H1">People</Title>
-      <Card
-        heading="People"
-        style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
-        avatar={<Icon name="table-view" />}
+    <div>
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
       >
-        <AnalyticalTable
-          data={peopleList.results}
-          columns={peopleTableColumnHeaders}
-          visibleRows={10}
-          scaleWidthMode={"Grow"}
-          loading={loading}
-        />
-        <FlexBox
-          justifyContent={FlexBoxJustifyContent.Center}
-          wrap={FlexBoxWrap.Wrap}
-          style={spacing.sapUiContentPadding}
+        <Title level="H1">People</Title>
+      </FlexBox>
+
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
+      >
+        <Card
+          heading="People"
+          style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
+          avatar={<Icon name="table-view" />}
         >
-          <Button
-            icon="arrow-left"
-            onClick={handleBackPageClick}
-            disabled={peopleList.previous == null ? true : false}
+          <AnalyticalTable
+            data={peopleList.results}
+            columns={peopleTableColumnHeaders}
+            visibleRows={10}
+            scaleWidthMode={"Grow"}
+            loading={loading}
+          />
+          <FlexBox
+            justifyContent={FlexBoxJustifyContent.Center}
+            wrap={FlexBoxWrap.Wrap}
+            style={spacing.sapUiContentPadding}
           >
-            Back
-          </Button>
-          <Button
-            icon="arrow-right"
-            onClick={handleNextPageClick}
-            disabled={peopleList.next == null ? true : false}
-          >
-            Next
-          </Button>
-        </FlexBox>
-      </Card>
-    </FlexBox>
+            <Button
+              icon="arrow-left"
+              onClick={handleBackPageClick}
+              disabled={peopleList.previous == null ? true : false}
+            >
+              Back
+            </Button>
+            <Button
+              icon="arrow-right"
+              onClick={handleNextPageClick}
+              disabled={peopleList.next == null ? true : false}
+            >
+              Next
+            </Button>
+          </FlexBox>
+        </Card>
+      </FlexBox>
+    </div>
   );
 }

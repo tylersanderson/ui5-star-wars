@@ -206,7 +206,7 @@ export function Planets() {
 
       <Card
         heading="Planets"
-        style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
+        style={spacing.sapUiContentPadding}
         avatar={<Icon name="table-view" />}
       >
         <AnalyticalTable

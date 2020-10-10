@@ -92,65 +92,72 @@ export function Films() {
   };
 
   return (
-    <FlexBox
-      justifyContent={FlexBoxJustifyContent.Center}
-      wrap={FlexBoxWrap.Wrap}
-      style={spacing.sapUiContentPadding}
-    >
-      <Title level="H1">Films</Title>
-      <Card
-        heading="Films"
-        style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
-        avatar={<Icon name="table-view" />}
+    <div>
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
       >
-        <List>
-          {filmListResults.map((film, i) => {
-            return (
-              <NotificationListItem
-                key={i}
-                heading={filmListResults[i].title}
-                footnotes={<Text>{filmListResults[i].release_date}</Text>}
-              >
-                {filmListResults[i].opening_crawl}
-              </NotificationListItem>
-            );
-          })}
-        </List>
-      </Card>
-
-      <Card
-        heading="Films"
-        style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
-        avatar={<Icon name="table-view" />}
+        <Title level="H1">Films</Title>
+      </FlexBox>
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
       >
-        <AnalyticalTable
-          data={filmList.results}
-          columns={filmTableColumnHeaders}
-          visibleRows={10}
-          scaleWidthMode={"Grow"}
-          loading={loading}
-        />
-        <FlexBox
-          justifyContent={FlexBoxJustifyContent.Center}
-          wrap={FlexBoxWrap.Wrap}
-          style={spacing.sapUiContentPadding}
+        <Card
+          heading="Films"
+          style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
+          avatar={<Icon name="table-view" />}
         >
-          <Button
-            icon="arrow-left"
-            onClick={handleBackPageClick}
-            disabled={filmList.previous == null ? true : false}
+          <List>
+            {filmListResults.map((film, i) => {
+              return (
+                <NotificationListItem
+                  key={i}
+                  heading={filmListResults[i].title}
+                  footnotes={<Text>{filmListResults[i].release_date}</Text>}
+                >
+                  {filmListResults[i].opening_crawl}
+                </NotificationListItem>
+              );
+            })}
+          </List>
+        </Card>
+        <Card
+          heading="Films"
+          style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
+          avatar={<Icon name="table-view" />}
+        >
+          <AnalyticalTable
+            data={filmList.results}
+            columns={filmTableColumnHeaders}
+            visibleRows={10}
+            scaleWidthMode={"Grow"}
+            loading={loading}
+          />
+          <FlexBox
+            justifyContent={FlexBoxJustifyContent.Center}
+            wrap={FlexBoxWrap.Wrap}
+            style={spacing.sapUiContentPadding}
           >
-            Back
-          </Button>
-          <Button
-            icon="arrow-right"
-            onClick={handleNextPageClick}
-            disabled={filmList.next == null ? true : false}
-          >
-            Next
-          </Button>
-        </FlexBox>
-      </Card>
-    </FlexBox>
+            <Button
+              icon="arrow-left"
+              onClick={handleBackPageClick}
+              disabled={filmList.previous == null ? true : false}
+            >
+              Back
+            </Button>
+            <Button
+              icon="arrow-right"
+              onClick={handleNextPageClick}
+              disabled={filmList.next == null ? true : false}
+            >
+              Next
+            </Button>
+          </FlexBox>
+        </Card>
+      </FlexBox>
+    </div>
   );
 }
