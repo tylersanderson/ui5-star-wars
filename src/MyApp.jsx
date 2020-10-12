@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ShellBar,
-  ShellBarItem,
-  Avatar,
-  StandardListItem,
-  List,
-} from "@ui5/webcomponents-react";
+import { ShellBar, Avatar, StandardListItem } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/icons/add.js";
 import { Link } from "@ui5/webcomponents-react/lib/Link";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -30,7 +24,7 @@ export function MyApp() {
   return (
     <>
       <ShellBar
-        logo={<img src="react-logo.png" />}
+        logo={<img alt="logo" src="react-logo.png" />}
         profile={<Avatar image="ui5-logo.png" />}
         primaryTitle={"UI5 Star Wars React App"}
         onLogoClick={handleLogoClick}

@@ -2,29 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
   Card,
   Text,
-  List,
-  StandardListItem,
-  ValueState,
-  ProgressIndicator,
   Title,
-  TitleLevel,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  FlexBoxDirection,
   AnalyticalTable,
   Icon,
   Button,
-  Link,
   Label,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
-import {
-  BarChart,
-  LineChart,
-  ScatterChart,
-  MicroBarChart,
-} from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
@@ -44,7 +31,6 @@ export function Vehicles() {
     []
   );
   const [vehiclesPage, setVehiclesPage] = useState(1);
-  const [toggleCharts, setToggleCharts] = useState("lineChart");
   const [loading, setLoading] = useState(false);
 
   async function fetchvehiclesList(x) {
@@ -74,26 +60,6 @@ export function Vehicles() {
     return vehiclesTableColumnHeadersResult;
   }
 
-  const fetchList = async function () {
-    setLoading(true);
-    const max = await getListCount("vehicles");
-    const list = [];
-    const requests = [];
-    for (let i = 1; i <= max; i++) {
-      const url = `https://swapi.dev/api/vehicles/${i}`;
-      const prom = fetch(url).then((r) => r.json());
-
-      requests.push(prom);
-    }
-    //setLoading(false);
-    return new Promise((resolve) => {
-      Promise.all(requests)
-        .then((proms) => proms.forEach((p) => list.push(p)))
-        .then(() => resolve(list));
-      //.then(setLoading(false));
-    });
-  };
-
   const removeJunkFromList = function (array) {
     const list = [];
     for (let i = 1; i <= array.length; i++) {
@@ -106,7 +72,24 @@ export function Vehicles() {
   };
 
   useEffect(() => {
-    //fetchvehiclesList(vehiclesPage).then((result) => setVehiclesList(result));
+    const fetchList = async function () {
+      setLoading(true);
+      const max = await getListCount("vehicles");
+      const list = [];
+      const requests = [];
+      for (let i = 1; i <= max; i++) {
+        const url = `https://swapi.dev/api/vehicles/${i}`;
+        const prom = fetch(url).then((r) => r.json());
+
+        requests.push(prom);
+      }
+      //setLoading(false);
+      return new Promise((resolve) => {
+        Promise.all(requests)
+          .then((proms) => proms.forEach((p) => list.push(p)))
+          .then(() => resolve(list));
+      });
+    };
     fetchvehiclesListSchema().then((result) =>
       setVehiclesTableColumnHeaders(result)
     );

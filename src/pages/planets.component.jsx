@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import {
   Card,
   Text,
-  List,
-  StandardListItem,
-  ValueState,
-  ProgressIndicator,
   Title,
-  TitleLevel,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  FlexBoxDirection,
   AnalyticalTable,
   Icon,
   Button,
@@ -20,7 +14,6 @@ import { spacing } from "@ui5/webcomponents-react-base";
 import {
   BarChart,
   LineChart,
-  ScatterChart,
   MicroBarChart,
 } from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
@@ -68,28 +61,25 @@ export function Planets() {
     return planetsTableColumnHeadersResult;
   }
 
-  const fetchList = async function () {
-    setLoading(true);
-    const max = await getListCount("planets");
-    const list = [];
-    const requests = [];
-    for (let i = 1; i <= max; i++) {
-      const url = `https://swapi.dev/api/planets/${i}`;
-      const prom = fetch(url).then((r) => r.json());
-
-      requests.push(prom);
-    }
-    //setLoading(false);
-    return new Promise((resolve) => {
-      Promise.all(requests)
-        .then((proms) => proms.forEach((p) => list.push(p)))
-        .then(() => resolve(list))
-        .then(setLoading(false));
-    });
-  };
-
   useEffect(() => {
-    //fetchplanetsList(planetsPage).then((result) => setPlanetsList(result));
+    const fetchList = async function () {
+      setLoading(true);
+      const max = await getListCount("planets");
+      const list = [];
+      const requests = [];
+      for (let i = 1; i <= max; i++) {
+        const url = `https://swapi.dev/api/planets/${i}`;
+        const prom = fetch(url).then((r) => r.json());
+
+        requests.push(prom);
+      }
+      return new Promise((resolve) => {
+        Promise.all(requests)
+          .then((proms) => proms.forEach((p) => list.push(p)))
+          .then(() => resolve(list))
+          .then(setLoading(false));
+      });
+    };
     fetchplanetsListSchema().then((result) =>
       setPlanetsTableColumnHeaders(result)
     );
@@ -100,7 +90,6 @@ export function Planets() {
   console.log(planetsList);
   console.log(planetsList.results);
   console.log(planetsTableColumnHeaders);
-  //getListCount("planets");
 
   const sortedPlanetsPopulationList = [...planetsList];
   sortedPlanetsPopulationList.sort(

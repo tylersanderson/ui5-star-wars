@@ -3,26 +3,19 @@ import {
   Card,
   Text,
   List,
-  StandardListItem,
-  ValueState,
-  ProgressIndicator,
   Title,
-  TitleLevel,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  FlexBoxDirection,
   AnalyticalTable,
   Icon,
   Button,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
-import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
 import "@ui5/webcomponents-icons/dist/icons/table-view.js";
-import { useHistory } from "react-router-dom";
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
@@ -32,7 +25,6 @@ export function Films() {
   const [filmList, setFilmList] = useState([]);
   const [filmTableColumnHeaders, setFilmTableColumnHeaders] = useState([]);
   const [filmPage, setFilmPage] = useState(1);
-  const [toggleCharts, setToggleCharts] = useState("lineChart");
   const [loading, setLoading] = useState(false);
   var filmListResults = filmList.results || [];
 
@@ -84,11 +76,6 @@ export function Films() {
       setFilmPage(newPage);
       setLoading(true);
     }
-  };
-
-  const history = useHistory();
-  const handleProgressHeaderClick = () => {
-    history.push("/detail");
   };
 
   return (

@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
   Card,
-  Text,
-  List,
-  StandardListItem,
-  ValueState,
-  ProgressIndicator,
   Title,
-  TitleLevel,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  FlexBoxDirection,
   AnalyticalTable,
   Icon,
   Button,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
-import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/line-chart.js";
 import "@ui5/webcomponents-icons/dist/icons/list.js";
 import "@ui5/webcomponents-icons/dist/icons/table-view.js";
-import { useHistory } from "react-router-dom";
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
@@ -31,7 +22,6 @@ export function People() {
   const [peopleList, setPeopleList] = useState([]);
   const [peopleTableColumnHeaders, setPeopleTableColumnHeaders] = useState([]);
   const [peoplePage, setPeoplePage] = useState(1);
-  const [toggleCharts, setToggleCharts] = useState("lineChart");
   const [loading, setLoading] = useState(false);
 
   async function fetchPeopleList(x) {
@@ -84,63 +74,6 @@ export function People() {
       setLoading(true);
     }
   };
-
-  const handleHeaderClick = () => {
-    if (toggleCharts === "lineChart") {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setToggleCharts("barChart");
-      }, 2000);
-    } else {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setToggleCharts("lineChart");
-      }, 2000);
-    }
-  };
-
-  // const history = useHistory();
-  // const handleProgressHeaderClick = () => {
-  //   history.push("/detail");
-  // };
-
-  const dataset = [
-    {
-      month: "January",
-      data: 65,
-    },
-    {
-      month: "February",
-      data: 59,
-    },
-    {
-      month: "March",
-      data: 80,
-    },
-    {
-      month: "April",
-      data: 81,
-    },
-    {
-      month: "May",
-      data: 56,
-    },
-    {
-      month: "June",
-      data: 55,
-    },
-    {
-      month: "July",
-      data: 40,
-    },
-  ];
-
-  const contentTitle =
-    toggleCharts === "lineChart" ? "Line Chart" : "Bar Chart";
-  const switchToChart =
-    toggleCharts === "lineChart" ? "Bar Chart" : "Line Chart";
 
   return (
     <div>
