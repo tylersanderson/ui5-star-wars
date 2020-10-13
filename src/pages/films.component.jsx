@@ -7,9 +7,7 @@ import {
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  AnalyticalTable,
   Icon,
-  Button,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
@@ -54,30 +52,6 @@ export function Films() {
     fetchfilmListSchema().then((result) => setFilmTableColumnHeaders(result));
   }, []);
 
-  console.log(filmPage);
-  console.log(filmList);
-  console.log(filmList.results);
-  console.log(filmTableColumnHeaders);
-  console.log(filmListResults);
-
-  const handleNextPageClick = async () => {
-    if (filmPage <= 8) {
-      setLoading(true);
-      const newPage = filmPage + 1;
-      fetchfilmList(newPage).then((result) => setFilmList(result));
-      setFilmPage(newPage);
-    }
-  };
-
-  const handleBackPageClick = () => {
-    if (filmPage >= 2) {
-      const newPage = filmPage - 1;
-      fetchfilmList(newPage).then((result) => setFilmList(result));
-      setFilmPage(newPage);
-      setLoading(true);
-    }
-  };
-
   return (
     <div>
       <FlexBox
@@ -110,39 +84,6 @@ export function Films() {
               );
             })}
           </List>
-        </Card>
-        <Card
-          heading="Films"
-          style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
-          avatar={<Icon name="table-view" />}
-        >
-          <AnalyticalTable
-            data={filmList.results}
-            columns={filmTableColumnHeaders}
-            visibleRows={10}
-            scaleWidthMode={"Grow"}
-            loading={loading}
-          />
-          <FlexBox
-            justifyContent={FlexBoxJustifyContent.Center}
-            wrap={FlexBoxWrap.Wrap}
-            style={spacing.sapUiContentPadding}
-          >
-            <Button
-              icon="arrow-left"
-              onClick={handleBackPageClick}
-              disabled={filmList.previous == null ? true : false}
-            >
-              Back
-            </Button>
-            <Button
-              icon="arrow-right"
-              onClick={handleNextPageClick}
-              disabled={filmList.next == null ? true : false}
-            >
-              Next
-            </Button>
-          </FlexBox>
         </Card>
       </FlexBox>
     </div>
