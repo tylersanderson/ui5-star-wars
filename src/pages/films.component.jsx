@@ -18,6 +18,7 @@ import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
 import { NotificationListItem } from "@ui5/webcomponents-react/lib/NotificationListItem";
+import { Spinner } from "@ui5/webcomponents-react/lib/Spinner";
 
 export function Films() {
   const [filmList, setFilmList] = useState([]);
@@ -48,7 +49,10 @@ export function Films() {
   }
 
   useEffect(() => {
-    fetchfilmList(filmPage).then((result) => setFilmList(result));
+    setLoading(true);
+    fetchfilmList(filmPage)
+      .then((result) => setFilmList(result))
+      .then(() => setLoading(false));
     fetchfilmListSchema().then((result) => setFilmTableColumnHeaders(result));
   }, []);
 
@@ -61,31 +65,41 @@ export function Films() {
       >
         <Title level="H1">Films</Title>
       </FlexBox>
-      <FlexBox
-        justifyContent={FlexBoxJustifyContent.Center}
-        wrap={FlexBoxWrap.Wrap}
-        style={spacing.sapUiContentPadding}
-      >
-        <Card
-          heading="Films"
-          style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
-          avatar={<Icon name="table-view" />}
+      {loading ? (
+        <FlexBox
+          justifyContent={FlexBoxJustifyContent.Center}
+          wrap={FlexBoxWrap.Wrap}
+          style={spacing.sapUiContentPadding}
         >
-          <List>
-            {filmListResults.map((film, i) => {
-              return (
-                <NotificationListItem
-                  key={i}
-                  heading={filmListResults[i].title}
-                  footnotes={<Text>{filmListResults[i].release_date}</Text>}
-                >
-                  {filmListResults[i].opening_crawl}
-                </NotificationListItem>
-              );
-            })}
-          </List>
-        </Card>
-      </FlexBox>
+          <Spinner style={{ justifyContent: "center", alignItems: "center" }} />
+        </FlexBox>
+      ) : (
+        <FlexBox
+          justifyContent={FlexBoxJustifyContent.Center}
+          wrap={FlexBoxWrap.Wrap}
+          style={spacing.sapUiContentPadding}
+        >
+          <Card
+            heading="Films"
+            style={{ maxWidth: "1200px", ...spacing.sapUiContentPadding }}
+            avatar={<Icon name="table-view" />}
+          >
+            <List>
+              {filmListResults.map((film, i) => {
+                return (
+                  <NotificationListItem
+                    key={i}
+                    heading={filmListResults[i].title}
+                    footnotes={<Text>{filmListResults[i].release_date}</Text>}
+                  >
+                    {filmListResults[i].opening_crawl}
+                  </NotificationListItem>
+                );
+              })}
+            </List>
+          </Card>
+        </FlexBox>
+      )}
     </div>
   );
 }

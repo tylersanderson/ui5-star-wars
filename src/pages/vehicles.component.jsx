@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
   Text,
   Title,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  AnalyticalTable,
-  Icon,
-  Button,
   Label,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
@@ -30,7 +26,6 @@ export function Vehicles() {
   const [vehiclesTableColumnHeaders, setVehiclesTableColumnHeaders] = useState(
     []
   );
-  const [vehiclesPage, setVehiclesPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   async function fetchvehiclesList(x) {
@@ -78,7 +73,7 @@ export function Vehicles() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `https://swapi.dev/api/vehicles/${i}`;
+        const url = `http://swapi.dev/api/vehicles/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
@@ -95,44 +90,6 @@ export function Vehicles() {
     );
     fetchList().then((result) => removeJunkFromList(result));
   }, []);
-
-  console.log(vehiclesPage);
-  console.log(vehiclesList);
-  console.log(vehiclesList.results);
-  console.log(vehiclesTableColumnHeaders);
-  //getListCount("vehicles");
-
-  const sortedvehiclesPopulationList = [...vehiclesList];
-  sortedvehiclesPopulationList.sort(
-    (a, b) => parseFloat(a.population) - parseFloat(b.population)
-  );
-
-  console.log(sortedvehiclesPopulationList);
-
-  const sortedvehiclesDiameterList = [...vehiclesList];
-  sortedvehiclesDiameterList.sort(
-    (a, b) => parseFloat(b.diameter) - parseFloat(a.diameter)
-  );
-
-  console.log(sortedvehiclesDiameterList);
-
-  const handleNextPageClick = async () => {
-    if (vehiclesPage <= 8) {
-      setLoading(true);
-      const newPage = vehiclesPage + 1;
-      fetchvehiclesList(newPage).then((result) => setVehiclesList(result));
-      setVehiclesPage(newPage);
-    }
-  };
-
-  const handleBackPageClick = () => {
-    if (vehiclesPage >= 2) {
-      const newPage = vehiclesPage - 1;
-      fetchvehiclesList(newPage).then((result) => setVehiclesList(result));
-      setVehiclesPage(newPage);
-      setLoading(true);
-    }
-  };
 
   return (
     <div>
@@ -263,39 +220,6 @@ export function Vehicles() {
           </Carousel>
         </FlexBox>
       )}
-      <Card
-        heading="Vehicles"
-        style={spacing.sapUiContentPadding}
-        avatar={<Icon name="table-view" />}
-      >
-        <AnalyticalTable
-          data={vehiclesList}
-          columns={vehiclesTableColumnHeaders}
-          visibleRows={10}
-          scaleWidthMode={"Grow"}
-          loading={loading}
-        />
-        <FlexBox
-          justifyContent={FlexBoxJustifyContent.Center}
-          wrap={FlexBoxWrap.Wrap}
-          style={spacing.sapUiContentPadding}
-        >
-          <Button
-            icon="arrow-left"
-            onClick={handleBackPageClick}
-            disabled={vehiclesList.previous == null ? true : false}
-          >
-            Back
-          </Button>
-          <Button
-            icon="arrow-right"
-            onClick={handleNextPageClick}
-            disabled={vehiclesList.next == null ? true : false}
-          >
-            Next
-          </Button>
-        </FlexBox>
-      </Card>
     </div>
   );
 }

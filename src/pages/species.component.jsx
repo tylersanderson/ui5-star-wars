@@ -37,23 +37,21 @@ export function Species() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `https://swapi.dev/api/species/${i}`;
+        const url = `http://swapi.dev/api/species/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
       }
-      //setLoading(false);
       return new Promise((resolve) => {
         Promise.all(requests)
           .then((proms) => proms.forEach((p) => list.push(p)))
-          .then(() => resolve(list))
-          .then(setLoading(false));
+          .then(() => resolve(list));
       });
     };
-    fetchList().then((result) => setSpeciesList(result));
+    fetchList()
+      .then((result) => setSpeciesList(result))
+      .then(() => setLoading(false));
   }, []);
-
-  console.log(speciesList);
 
   return (
     <div>

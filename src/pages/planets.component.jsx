@@ -68,7 +68,7 @@ export function Planets() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `https://swapi.dev/api/planets/${i}`;
+        const url = `http://swapi.dev/api/planets/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
@@ -76,34 +76,26 @@ export function Planets() {
       return new Promise((resolve) => {
         Promise.all(requests)
           .then((proms) => proms.forEach((p) => list.push(p)))
-          .then(() => resolve(list))
-          .then(setLoading(false));
+          .then(() => resolve(list));
       });
     };
     fetchplanetsListSchema().then((result) =>
       setPlanetsTableColumnHeaders(result)
     );
-    fetchList().then((result) => setPlanetsList(result));
+    fetchList()
+      .then((result) => setPlanetsList(result))
+      .then(() => setLoading(false));
   }, []);
-
-  console.log(planetsPage);
-  console.log(planetsList);
-  console.log(planetsList.results);
-  console.log(planetsTableColumnHeaders);
 
   const sortedPlanetsPopulationList = [...planetsList];
   sortedPlanetsPopulationList.sort(
     (a, b) => parseFloat(a.population) - parseFloat(b.population)
   );
 
-  console.log(sortedPlanetsPopulationList);
-
   const sortedPlanetsDiameterList = [...planetsList];
   sortedPlanetsDiameterList.sort(
     (a, b) => parseFloat(b.diameter) - parseFloat(a.diameter)
   );
-
-  console.log(sortedPlanetsDiameterList);
 
   const handleNextPageClick = async () => {
     if (planetsPage <= 8) {

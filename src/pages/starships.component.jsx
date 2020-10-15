@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
-  Text,
   Title,
   FlexBox,
   FlexBoxJustifyContent,
   FlexBoxWrap,
-  AnalyticalTable,
-  Icon,
-  Button,
-  Label,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js";
@@ -20,10 +14,7 @@ import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-react/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; // Only if using the @ui5/webcomponents-fiori package
 import "@ui5/webcomponents-icons/dist/Assets.js"; // Only if using the @ui5/webcomponents-icons package
-import { Carousel } from "@ui5/webcomponents-react/lib/Carousel";
 import { Spinner } from "@ui5/webcomponents-react/lib/Spinner";
-import { ObjectPage } from "@ui5/webcomponents-react/lib/ObjectPage";
-import { ObjectPageSection } from "@ui5/webcomponents-react/lib/ObjectPageSection";
 import { Panel } from "@ui5/webcomponents-react/lib/Panel";
 
 export function Starships() {
@@ -32,7 +23,6 @@ export function Starships() {
     starshipsTableColumnHeaders,
     setStarshipsTableColumnHeaders,
   ] = useState([]);
-  const [starshipsPage, setStarshipsPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   async function fetchstarshipsList(x) {
@@ -80,18 +70,18 @@ export function Starships() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= 11; i++) {
-        const url = `https://swapi.dev/api/starships/${i}`;
+        const url = `http://swapi.dev/api/starships/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
       }
+      //https://swapi.dev/api/starships/12 was giving cors error...
       for (let i = 13; i <= max; i++) {
-        const url = `https://swapi.dev/api/starships/${i}`;
+        const url = `http://swapi.dev/api/starships/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
       }
-      //setLoading(false);
       return new Promise((resolve) => {
         Promise.all(requests)
           .then((proms) => proms.forEach((p) => list.push(p)))
@@ -103,44 +93,6 @@ export function Starships() {
     );
     fetchList().then((result) => removeJunkFromList(result));
   }, []);
-
-  console.log(starshipsPage);
-  console.log(starshipsList);
-  console.log(starshipsList.results);
-  console.log(starshipsTableColumnHeaders);
-  //getListCount("starships");
-
-  const sortedstarshipsPopulationList = [...starshipsList];
-  sortedstarshipsPopulationList.sort(
-    (a, b) => parseFloat(a.population) - parseFloat(b.population)
-  );
-
-  console.log(sortedstarshipsPopulationList);
-
-  const sortedstarshipsDiameterList = [...starshipsList];
-  sortedstarshipsDiameterList.sort(
-    (a, b) => parseFloat(b.diameter) - parseFloat(a.diameter)
-  );
-
-  console.log(sortedstarshipsDiameterList);
-
-  const handleNextPageClick = async () => {
-    if (starshipsPage <= 8) {
-      setLoading(true);
-      const newPage = starshipsPage + 1;
-      fetchstarshipsList(newPage).then((result) => setStarshipsList(result));
-      setStarshipsPage(newPage);
-    }
-  };
-
-  const handleBackPageClick = () => {
-    if (starshipsPage >= 2) {
-      const newPage = starshipsPage - 1;
-      fetchstarshipsList(newPage).then((result) => setStarshipsList(result));
-      setStarshipsPage(newPage);
-      setLoading(true);
-    }
-  };
 
   return (
     <div>
@@ -184,46 +136,34 @@ export function Starships() {
                   headerLevel="H2"
                   headerText={starshipsList[i].name}
                 >
-                  {starshipsList[i].name}
+                  Model: {starshipsList[i].model}
+                  <br></br>
+                  <br></br>
+                  Manufacturer: {starshipsList[i].manufacturer}
+                  <br></br>
+                  <br></br>
+                  Cost: {starshipsList[i].cost_in_credits}
+                  <br></br>
+                  <br></br>
+                  Length: {starshipsList[i].length}
+                  <br></br>
+                  <br></br>
+                  Max Speed: {starshipsList[i].max_atmosphering_speed}
+                  <br></br>
+                  <br></br>
+                  Crew Size: {starshipsList[i].crew}
+                  <br></br>
+                  <br></br>
+                  Passenger Capacity: {starshipsList[i].passengers}
+                  <br></br>
+                  <br></br>
+                  Cargo Capcity: {starshipsList[i].cargo_capacity}
                 </Panel>
               </div>
             );
           })}
         </FlexBox>
       )}
-      <Card
-        heading="starships"
-        style={spacing.sapUiContentPadding}
-        avatar={<Icon name="table-view" />}
-      >
-        <AnalyticalTable
-          data={starshipsList}
-          columns={starshipsTableColumnHeaders}
-          visibleRows={10}
-          scaleWidthMode={"Grow"}
-          loading={loading}
-        />
-        <FlexBox
-          justifyContent={FlexBoxJustifyContent.Center}
-          wrap={FlexBoxWrap.Wrap}
-          style={spacing.sapUiContentPadding}
-        >
-          <Button
-            icon="arrow-left"
-            onClick={handleBackPageClick}
-            disabled={starshipsList.previous == null ? true : false}
-          >
-            Back
-          </Button>
-          <Button
-            icon="arrow-right"
-            onClick={handleNextPageClick}
-            disabled={starshipsList.next == null ? true : false}
-          >
-            Next
-          </Button>
-        </FlexBox>
-      </Card>
     </div>
   );
 }

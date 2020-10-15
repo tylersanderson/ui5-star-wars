@@ -27,7 +27,6 @@ export function People() {
   async function fetchPeopleList(x) {
     let people = await fetch(`https://swapi.dev/api/people/?page=${x}`);
     let peopleJSON = await people.json();
-    setLoading(false);
     return peopleJSON;
   }
   async function fetchPeopleListSchema() {
@@ -46,32 +45,34 @@ export function People() {
   }
 
   useEffect(() => {
-    fetchPeopleList(peoplePage).then((result) => setPeopleList(result));
+    setLoading(true);
+    fetchPeopleList(peoplePage)
+      .then((result) => setPeopleList(result))
+      .then(() => setLoading(false));
     fetchPeopleListSchema().then((result) =>
       setPeopleTableColumnHeaders(result)
     );
   }, []);
 
-  console.log(peoplePage);
-  console.log(peopleList);
-  console.log(peopleList.results);
-  console.log(peopleTableColumnHeaders);
-
   const handleNextPageClick = async () => {
     if (peoplePage <= 8) {
       setLoading(true);
       const newPage = peoplePage + 1;
-      fetchPeopleList(newPage).then((result) => setPeopleList(result));
+      fetchPeopleList(newPage)
+        .then((result) => setPeopleList(result))
+        .then(() => setLoading(false));
       setPeoplePage(newPage);
     }
   };
 
   const handleBackPageClick = () => {
     if (peoplePage >= 2) {
-      const newPage = peoplePage - 1;
-      fetchPeopleList(newPage).then((result) => setPeopleList(result));
-      setPeoplePage(newPage);
       setLoading(true);
+      const newPage = peoplePage - 1;
+      fetchPeopleList(newPage)
+        .then((result) => setPeopleList(result))
+        .then(() => setLoading(false));
+      setPeoplePage(newPage);
     }
   };
 

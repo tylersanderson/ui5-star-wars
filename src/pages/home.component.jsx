@@ -64,8 +64,9 @@ export function Home() {
         <ProductSwitchItem
           heading="Starships"
           icon="flight"
-          subtitle="Concur"
+          subtitle="UI5 Panel"
           target="_self"
+          targetSrc="#/starships"
         />
       </ProductSwitch>
     </FlexBox>
