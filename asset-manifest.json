@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tylersanderson/ui5-star-wars/static/css/main.d74098ff.chunk.css",
+    "main.js": "/tylersanderson/ui5-star-wars/static/js/main.359b102d.chunk.js",
+    "main.js.map": "/tylersanderson/ui5-star-wars/static/js/main.359b102d.chunk.js.map",
+    "runtime-main.js": "/tylersanderson/ui5-star-wars/static/js/runtime-main.3a49241f.js",
+    "runtime-main.js.map": "/tylersanderson/ui5-star-wars/static/js/runtime-main.3a49241f.js.map",
+    "static/js/2.9276bb71.chunk.js": "/tylersanderson/ui5-star-wars/static/js/2.9276bb71.chunk.js",
+    "static/js/2.9276bb71.chunk.js.map": "/tylersanderson/ui5-star-wars/static/js/2.9276bb71.chunk.js.map",
+    "index.html": "/tylersanderson/ui5-star-wars/index.html",
+    "precache-manifest.55df914b32043c6c212c4819a8a487c9.js": "/tylersanderson/ui5-star-wars/precache-manifest.55df914b32043c6c212c4819a8a487c9.js",
+    "service-worker.js": "/tylersanderson/ui5-star-wars/service-worker.js",
+    "static/css/main.d74098ff.chunk.css.map": "/tylersanderson/ui5-star-wars/static/css/main.d74098ff.chunk.css.map",
+    "static/js/2.9276bb71.chunk.js.LICENSE.txt": "/tylersanderson/ui5-star-wars/static/js/2.9276bb71.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3a49241f.js",
+    "static/js/2.9276bb71.chunk.js",
+    "static/css/main.d74098ff.chunk.css",
+    "static/js/main.359b102d.chunk.js"
+  ]
+}
