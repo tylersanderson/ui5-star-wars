@@ -70,14 +70,14 @@ export function Starships() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= 11; i++) {
-        const url = `http://swapi.dev/api/starships/${i}/`;
+        const url = `https://swapi.dev/api/starships/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
       }
       //https://swapi.dev/api/starships/12 was giving cors error...
       for (let i = 13; i <= max; i++) {
-        const url = `http://swapi.dev/api/starships/${i}/`;
+        const url = `https://swapi.dev/api/starships/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);

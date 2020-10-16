@@ -37,7 +37,7 @@ export function Species() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `http://swapi.dev/api/species/${i}/`;
+        const url = `https://swapi.dev/api/species/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);

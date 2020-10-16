@@ -68,7 +68,7 @@ export function Planets() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `http://swapi.dev/api/planets/${i}/`;
+        const url = `https://swapi.dev/api/planets/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);

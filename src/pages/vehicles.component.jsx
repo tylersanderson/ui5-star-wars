@@ -73,7 +73,7 @@ export function Vehicles() {
       const list = [];
       const requests = [];
       for (let i = 1; i <= max; i++) {
-        const url = `http://swapi.dev/api/vehicles/${i}/`;
+        const url = `https://swapi.dev/api/vehicles/${i}/`;
         const prom = fetch(url).then((r) => r.json());
 
         requests.push(prom);
