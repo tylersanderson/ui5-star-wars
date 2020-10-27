@@ -75,7 +75,7 @@ export function Starships() {
 
         requests.push(prom);
       }
-      //https://swapi.dev/api/starships/12 was giving cors error...
+      //https://swapi.dev/api/starships/12 was cdgiving cors error...
       for (let i = 13; i <= max; i++) {
         const url = `https://swapi.dev/api/starships/${i}/`;
         const prom = fetch(url).then((r) => r.json());

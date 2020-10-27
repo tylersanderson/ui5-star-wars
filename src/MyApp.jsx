@@ -1,7 +1,6 @@
 import React from "react";
 import { ShellBar, Avatar, StandardListItem } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/icons/add.js";
-import { Link } from "@ui5/webcomponents-react/lib/Link";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { People } from "./pages/people.component";
@@ -19,7 +18,32 @@ export function MyApp() {
   const history = useHistory();
   const handleLogoClick = () => {
     history.push("./home");
-    console.log("react logo clicked!");
+  };
+
+  const handleMenuItemClick = (item) => {
+    switch (item.detail.item.dataset.key) {
+      case "Home":
+        history.push("./home");
+        break;
+      case "Films":
+        history.push("./films");
+        break;
+      case "People":
+        history.push("./people");
+        break;
+      case "Species":
+        history.push("./species");
+        break;
+      case "Planets":
+        history.push("./planets");
+        break;
+      case "Vehicles":
+        history.push("./vehicles");
+        break;
+      case "Starships":
+        history.push("./starships");
+        break;
+    }
   };
 
   return (
@@ -29,85 +53,72 @@ export function MyApp() {
         profile={<Avatar image="ui5-logo.png" />}
         primaryTitle={"UI5 Star Wars React App"}
         onLogoClick={handleLogoClick}
+        onMenuItemClick={handleMenuItemClick}
         menuItems={
           <div>
-            <Link href="#/home">
-              <StandardListItem
-                data-key="1"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Home
-              </StandardListItem>
-            </Link>
-            <Link href="#/films">
-              <StandardListItem
-                data-key="2"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Films
-              </StandardListItem>
-            </Link>
-            <Link href="#/people">
-              <StandardListItem
-                data-key="3"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                People
-              </StandardListItem>
-            </Link>
-            <Link href="#/species">
-              <StandardListItem
-                data-key="3"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Species
-              </StandardListItem>
-            </Link>
-            <Link href="#/planets">
-              <StandardListItem
-                data-key="3"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Planets
-              </StandardListItem>
-            </Link>
-            <Link href="#/vehicles">
-              <StandardListItem
-                data-key="3"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Vehicles
-              </StandardListItem>
-            </Link>
-            <Link href="#/starships">
-              <StandardListItem
-                data-key="3"
-                iconEnd={false}
-                infoState="None"
-                selected={false}
-                type="Active"
-              >
-                Starships
-              </StandardListItem>
-            </Link>
+            <StandardListItem
+              data-key="Home"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Home
+            </StandardListItem>
+            <StandardListItem
+              data-key="Films"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Films
+            </StandardListItem>
+            <StandardListItem
+              data-key="People"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              People
+            </StandardListItem>
+            <StandardListItem
+              data-key="Species"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Species
+            </StandardListItem>
+            <StandardListItem
+              data-key="Planets"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Planets
+            </StandardListItem>
+            <StandardListItem
+              data-key="Vehicles"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Vehicles
+            </StandardListItem>
+            <StandardListItem
+              data-key="Starships"
+              iconEnd={false}
+              infoState="None"
+              selected={false}
+              type="Active"
+            >
+              Starships
+            </StandardListItem>
           </div>
         }
       ></ShellBar>
