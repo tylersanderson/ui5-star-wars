@@ -48,12 +48,40 @@ export function Films() {
     return filmTableColumnHeadersResult;
   }
 
+  const filmTableHeaders = [
+    {
+      Header: "Title",
+      accessor: "title",
+    },
+    {
+      Header: "Episode",
+      accessor: "episode_id",
+    },
+    {
+      Header: "Opening Crawl",
+      accessor: "opening_crawl",
+    },
+    {
+      Header: "Director",
+      accessor: "director",
+    },
+    {
+      Header: "Producer",
+      accessor: "producer",
+    },
+    {
+      Header: "Release Date",
+      accessor: "release_date",
+    },
+  ];
+
   useEffect(() => {
     setLoading(true);
     fetchfilmList(filmPage)
       .then((result) => setFilmList(result))
       .then(() => setLoading(false));
-    fetchfilmListSchema().then((result) => setFilmTableColumnHeaders(result));
+    // fetchfilmListSchema().then((result) => setFilmTableColumnHeaders(result));
+    setFilmTableColumnHeaders(filmTableHeaders);
   }, []);
 
   return (

@@ -19,10 +19,8 @@ import { Panel } from "@ui5/webcomponents-react/lib/Panel";
 
 export function Starships() {
   const [starshipsList, setStarshipsList] = useState([]);
-  const [
-    starshipsTableColumnHeaders,
-    setStarshipsTableColumnHeaders,
-  ] = useState([]);
+  const [starshipsTableColumnHeaders, setStarshipsTableColumnHeaders] =
+    useState([]);
   const [loading, setLoading] = useState(false);
 
   async function fetchstarshipsList(x) {
@@ -41,14 +39,13 @@ export function Starships() {
     const starshipsSchemaResult = await fetch(
       "https://swapi.dev/api/starships/schema"
     ).then((response) => response.json());
-    const starshipsTableColumnHeadersResult = starshipsSchemaResult.required.map(
-      (item) => {
+    const starshipsTableColumnHeadersResult =
+      starshipsSchemaResult.required.map((item) => {
         return {
           Header: item,
           accessor: item,
         };
-      }
-    );
+      });
     return starshipsTableColumnHeadersResult;
   }
 
@@ -62,6 +59,61 @@ export function Starships() {
     setStarshipsList(list);
     setLoading(false);
   };
+
+  const starshipTableHeaders = [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Model",
+      accessor: "model",
+    },
+    {
+      Header: "Manufacturer",
+      accessor: "manufacturer",
+    },
+    {
+      Header: "Cost",
+      accessor: "cost_in_credits",
+    },
+    {
+      Header: "Length",
+      accessor: "length",
+    },
+    {
+      Header: "Max Speed",
+      accessor: "max_atmosphering_speed",
+    },
+    {
+      Header: "Crew",
+      accessor: "crew",
+    },
+    {
+      Header: "Passengers",
+      accessor: "passengers",
+    },
+    {
+      Header: "Cargo Capacity",
+      accessor: "cargo_capacity",
+    },
+    {
+      Header: "Consumables",
+      accessor: "consumables",
+    },
+    {
+      Header: "Hyperdrive Rating",
+      accessor: "hyperdrive_rating",
+    },
+    {
+      Header: "MGLT",
+      accessor: "MGLT",
+    },
+    {
+      Header: "Starship Class",
+      accessor: "starship_class",
+    },
+  ];
 
   useEffect(() => {
     const fetchList = async function () {
@@ -88,9 +140,10 @@ export function Starships() {
           .then(() => resolve(list));
       });
     };
-    fetchstarshipsListSchema().then((result) =>
-      setStarshipsTableColumnHeaders(result)
-    );
+    // fetchstarshipsListSchema().then((result) =>
+    //   setStarshipsTableColumnHeaders(result)
+    // );
+    setStarshipsTableColumnHeaders(starshipTableHeaders);
     fetchList().then((result) => removeJunkFromList(result));
   }, []);
 

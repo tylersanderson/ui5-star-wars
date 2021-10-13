@@ -66,6 +66,53 @@ export function Vehicles() {
     setLoading(false);
   };
 
+  const vehicleTableHeaders = [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Model",
+      accessor: "model",
+    },
+    {
+      Header: "Manufacturer",
+      accessor: "manufacturer",
+    },
+    {
+      Header: "Cost",
+      accessor: "cost_in_credits",
+    },
+    {
+      Header: "Length",
+      accessor: "length",
+    },
+    {
+      Header: "Max Speed",
+      accessor: "max_atmosphering_speed",
+    },
+    {
+      Header: "Crew",
+      accessor: "crew",
+    },
+    {
+      Header: "Passengers",
+      accessor: "passengers",
+    },
+    {
+      Header: "Cargo Capacity",
+      accessor: "cargo_capacity",
+    },
+    {
+      Header: "Consumablesme",
+      accessor: "consumables",
+    },
+    {
+      Header: "Vehicle Class",
+      accessor: "vehicle_class",
+    },
+  ];
+
   useEffect(() => {
     const fetchList = async function () {
       setLoading(true);
@@ -85,9 +132,10 @@ export function Vehicles() {
           .then(() => resolve(list));
       });
     };
-    fetchvehiclesListSchema().then((result) =>
-      setVehiclesTableColumnHeaders(result)
-    );
+    // fetchvehiclesListSchema().then((result) =>
+    //   setVehiclesTableColumnHeaders(result)
+    // );
+    setVehiclesTableColumnHeaders(vehicleTableHeaders);
     fetchList().then((result) => removeJunkFromList(result));
   }, []);
 

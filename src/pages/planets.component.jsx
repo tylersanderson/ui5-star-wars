@@ -61,6 +61,45 @@ export function Planets() {
     return planetsTableColumnHeadersResult;
   }
 
+  const platentsTableHeaders = [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Rotation Period",
+      accessor: "rotation_period",
+    },
+    {
+      Header: "Orbital Period",
+      accessor: "orbital_period",
+    },
+    {
+      Header: "Diameter",
+      accessor: "diameter",
+    },
+    {
+      Header: "Climate",
+      accessor: "climate",
+    },
+    {
+      Header: "Gravity",
+      accessor: "gravity",
+    },
+    {
+      Header: "Terrain",
+      accessor: "terrain",
+    },
+    {
+      Header: "Surface Water",
+      accessor: "surface_water",
+    },
+    {
+      Header: "Population",
+      accessor: "population",
+    },
+  ];
+
   useEffect(() => {
     const fetchList = async function () {
       setLoading(true);
@@ -79,9 +118,10 @@ export function Planets() {
           .then(() => resolve(list));
       });
     };
-    fetchplanetsListSchema().then((result) =>
-      setPlanetsTableColumnHeaders(result)
-    );
+    // fetchplanetsListSchema().then((result) =>
+    //   setPlanetsTableColumnHeaders(result)
+    // );
+    setPlanetsTableColumnHeaders(platentsTableHeaders);
     fetchList()
       .then((result) => setPlanetsList(result))
       .then(() => setLoading(false));

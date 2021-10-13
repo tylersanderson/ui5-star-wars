@@ -44,14 +44,62 @@ export function People() {
     return peopleTableColumnHeadersResult;
   }
 
+  const peopleColumnHeaders = [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Height",
+      accessor: "height",
+    },
+    {
+      Header: "Mass",
+      accessor: "mass",
+    },
+    {
+      Header: "Hair Color",
+      accessor: "hair_color",
+    },
+    {
+      Header: "Eye Color",
+      accessor: "eye_color",
+    },
+    {
+      Header: "Birth Year",
+      accessor: "birth_year",
+    },
+    {
+      Header: "Gender",
+      accessor: "gender",
+    },
+    //   name: "name",
+    // height: "height",
+    // mass: "mass",
+    // hair_color: "hair_color",
+    // skin_color: "skin_color",
+    // eye_color: "eye_color",
+    // birth_year: "birth_year",
+    // gender: "gender",
+    // homeworld: "homeworld",
+    // films: "films",
+    // species: "species",
+    // vehicles: "vehicles",
+    // starships: "starships",
+    // created: "created",
+    // edited: "edited",
+    // url: "url,
+    //}
+  ];
+
   useEffect(() => {
     setLoading(true);
     fetchPeopleList(peoplePage)
       .then((result) => setPeopleList(result))
       .then(() => setLoading(false));
-    fetchPeopleListSchema().then((result) =>
-      setPeopleTableColumnHeaders(result)
-    );
+    // fetchPeopleListSchema().then((result) =>
+    //   setPeopleTableColumnHeaders(result)
+    setPeopleTableColumnHeaders(peopleColumnHeaders);
   }, []);
 
   const handleNextPageClick = async () => {
